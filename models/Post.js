@@ -1,20 +1,26 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-    title: {
+    firstName: {
         type: String,
         required: true
     },
-    description: {
+    lastName: {
         type: String,
         required: true
     },
-    location: {
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    email: {
         type: String,
         required: true
     },
-    salary: {
+    password: {
         type: Number,
+        default: "Basic",
         required: true
     },
     date: {

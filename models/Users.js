@@ -17,7 +17,7 @@ PostSchema.methods.generateAuthToken = function () {
     return token
 };
 
-const User = mongoose.model("Posts", PostScheme);
+const User = mongoose.model("user", PostScheme);
 const validate = (data) => {
     const schema = joi.object({
         firstName: joi.string().required().label("First Name"),

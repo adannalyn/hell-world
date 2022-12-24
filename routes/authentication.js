@@ -4,14 +4,14 @@ const controllers = require('../controllers/authenticationControllers')
 const router = express.Router();
 const { User } = require('../models/Users');
 const Joi = require('joi');
+const bcrypt = require('bcrypt');
 
 router.post('/signup', controllers.signupController);
+
 router.post('/login', controllers.loginController);
 
 const validate = (data) => {
     const schema = Joi.object({
-        firstName: Joi.string().required().label("First Name"),
-        lastName: Joi.string().required().label("Last Name"),
         email: Joi.string().email().required().label("Email"),
         password: Joi.passwordComplexity().required().label("Password"),
     });

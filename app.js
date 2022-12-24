@@ -1,28 +1,22 @@
-const express = require ('express');
+const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors')
 const app = express();
-app.use(express.json());
-
-const cors = require ('cors');
-app.use(cors());
-
 require('dotenv/config');
-const dbConnect = require('./config/db_connect');
-dbConnect();
 
-const bodyParser = require('body-parser')
+app.use(cors());
 app.use(bodyParser.json());
 
-// user signup & login
-const authRoute = require('./routes/authentication');
-app.use('/api/auth', authRoute);
+const postRoute = require('./routes/posts');
+app.use('/posts', postRoute);
 
-// job_search
-const searchRoute = require('./routes/job_search');
-app.use('/api/jobs/search', searchRoute);
+app.get('/', (req, res) => {
+  res.send('We are on home');
+});
 
-// job_posts
-const postRoute = require('./routes/job_posts');
-app.use('/api/jobs/posts', postRoute);
+mongoose.connect(process.env.DB_CONNECT, mongoose.set('strictQuery', true),() =>{
+    console.log('connected to DB! ');
+})
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(8080);

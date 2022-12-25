@@ -22,7 +22,7 @@ const corsOptions = {
   optionsSuccessStatus: 200 // for some legacy browsers
 }
 
-app.get('/welcome', cors(corsOptions), auth, (req, res) => {
+app.get('/api/welcome', cors(corsOptions), auth, (req, res) => {
   res.status(200).send("Welcome to Jobinnaire 🙌 ");
 });
 
@@ -33,7 +33,7 @@ app.use(express.json({ limit: "50mb" }));
 const User = require("./model/user");
 
 // Register
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
 
   // Our register logic starts here
    try {
@@ -82,7 +82,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
 
   // Our login logic starts here
    try {

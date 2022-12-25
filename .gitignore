@@ -1,2 +1,8 @@
 .env
-node_modules
+node_modules/
+.app.js.swp
+.env.swp
+.package.json.swp
+.gitignore.swp
+config/.database.js.swp
+middleware/.auth.js.swp

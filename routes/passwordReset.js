@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
         res.send("password reset link sent to your email account");
     } catch (error) {
-        res.send("An error occured");
+        res.send("An error occurred");
         console.log(error);
     }
 });
@@ -53,9 +53,9 @@ router.post("/:userId/:token", async (req, res) => {
         await user.save();
         await token.delete();
 
-        res.send("password reset sucessfully.");
+        res.send("password reset successfully.");
     } catch (error) {
-        res.send("An error occured");
+        res.send("An error occurred");
         console.log(error);
     }
 });

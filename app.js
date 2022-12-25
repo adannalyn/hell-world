@@ -20,10 +20,10 @@ const corsOptions = {
   optionsSuccessStatus: 200 
 }
 
+// Test
 app.get('/api/welcome', cors(corsOptions), auth, (req, res) => {
   res.status(200).send("Welcome to Jobinaire 🙌 ");
 });
-
 
 // user signup & login
 const authRoute = require('./routes/authentication');
@@ -37,6 +37,7 @@ app.use('/api/jobs/search', searchRoute);
 const filterRoute = require('./routes/job_filter');
 app.use('/api/jobs/filter', filterRoute);
 
+// Reset Password
 const passwordReset = require("./routes/passwordReset");
 const users = require("./routes/users");
 

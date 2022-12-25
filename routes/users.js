@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
 
         res.send(user);
     } catch (error) {
-        res.send("An error occured");
+        res.send("An error occurred");
         console.log(error);
     }
 });

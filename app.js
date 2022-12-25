@@ -1,9 +1,7 @@
-require('events').EventEmitter.prototype._maxListeners = 100;
 const express = require("express");
 const app = express();
 app.use(express.json());
 app.use(express.static('public'))
-
 
 const cors = require ('cors');
 app.use(cors());
@@ -23,10 +21,8 @@ const corsOptions = {
 }
 
 app.get('/api/welcome', cors(corsOptions), auth, (req, res) => {
-  res.status(200).send("Welcome to Jobinnaire 🙌 ");
+  res.status(200).send("Welcome to Jobinaire 🙌 ");
 });
-
-app.use(express.json({ limit: "50mb" }));
 
 
 // user signup & login
@@ -38,10 +34,13 @@ const searchRoute = require('./routes/job_search');
 app.use('/api/jobs/search', searchRoute);
 
 // job_filter
-const postRoute = require('./routes/job_posts');
-app.use('/api/jobs/posts', postRoute);
+const filterRoute = require('./routes/job_filter');
+app.use('/api/jobs/filter', filterRoute);
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+const passwordReset = require("./routes/passwordReset");
+const users = require("./routes/users");
+
+app.use("/api/users", users);
+app.use("/api/password-reset", passwordReset);
 
 module.exports = app;

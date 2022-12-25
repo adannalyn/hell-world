@@ -10,7 +10,7 @@ const signupController = async (req, res) => {
         }
         const user = await User.findOne({ email: req.body.email });
         if(user){
-            return res.status(409).json({ message: "User with given email already exist!"});
+            return res.status(409).json({ message: "User Already Exist. Please Login" });
         }
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -20,6 +20,7 @@ const signupController = async (req, res) => {
         res.status(500).json({ message: "Internal server Error"});
     }
 }
+
 
 const loginController = async(req, res) => {
     try {

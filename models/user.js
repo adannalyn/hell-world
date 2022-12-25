@@ -10,13 +10,16 @@ const PostSchema = new mongoose.Schema({
 });
 
 PostSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign(
-	    { _id:this._id },
-	    process.env.JWTPRIVATEKEY,
-	    { 
-		    expiresIn: "7d" 
-	    });
-    return token;
+
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "5h",
+        }
+      );
+      user.token = token;
+      res.status(201).json(user);
 };
 
 const User = mongoose.model("user", PostSchema);

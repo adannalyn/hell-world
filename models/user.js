@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
-const passwordComplexity = require('joi-password-complexity')
+const passwordComplexity = require("joi-password-complexity");
 
 const PostSchema = new mongoose.Schema({
-    email: { type: String, required: true },
-    password: { type: Number, default: "Basic", required: true },
+    email: { type: String, unique: true },
+    password: { type: String },
+    confirmPassword : { type: String },
 });
 
 PostSchema.methods.generateAuthToken = function () {
@@ -21,8 +22,9 @@ PostSchema.methods.generateAuthToken = function () {
 const User = mongoose.model("user", PostSchema);
 const validate = (data) => {
     const schema = Joi.object({
+        confirmPassword: Joi.string().required(),
         email: Joi.string().email().required().label("Email"),
-        password: Joi.passwordComplexity().required().label("Password"),
+        password: Joi.passwordComplexity().validate("aPassword123!"),
     });
     return schema.validate(data);
 }

@@ -1,5 +1,4 @@
 .env
-<<<<<<< HEAD
 node_modules/
 .app.js.swp
 .env.swp
@@ -7,6 +6,3 @@ node_modules/
 .gitignore.swp
 config/.database.js.swp
 middleware/.auth.js.swp
-=======
-node_modules
->>>>>>> ca3ef00c3b1f3ccf7be89054bcf1c0bf68ba8179

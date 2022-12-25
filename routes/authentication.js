@@ -4,6 +4,7 @@ const controllers = require('../controllers/authenticationControllers')
 const router = express.Router();
 const { User } = require('../models/Users');
 const Joi = require('joi');
+const passwordComplexity = require('joi-password-complexity').default;
 const bcrypt = require('bcrypt');
 
 router.post('/signup', controllers.signupController);

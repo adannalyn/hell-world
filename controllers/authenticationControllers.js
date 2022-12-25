@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const { validate, User } = require("../models/Users");
 
 const signupController = async (req, res) => {

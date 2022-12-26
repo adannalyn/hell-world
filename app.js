@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use(express.json({ limit: "50mb" }));
 
 const cors = require ('cors');
 app.use(cors());
@@ -14,6 +15,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
 const auth = require("./middleware/auth");
+app.use(auth);
 
 const corsOptions = {
   origin: 'http://github.com/lyndatcd/Hell-world.git',

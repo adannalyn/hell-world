@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity').default;
 const { validate, User } = require("../models/user");
@@ -43,13 +43,7 @@ const loginController = async(req, res) => {
         res.status(500).json({ message: "Internal server error"});
     }
 }
-const validate = (data) => {
-    const schema = Joi.object({
-        email: Joi.string().email().required().label("Email"),
-        password: passwordComplexity().required().label("Password"),
-    });
-    return schema.validate(data);
-}
+
 
 module.exports = {
     signupController,

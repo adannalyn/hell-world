@@ -1,4 +1,5 @@
 const axios = require("axios");
+const express = require("express");               const router = express.Router();
 
 const options = {
   method: 'GET',
@@ -15,3 +16,5 @@ axios.request(options).then(function (response) {
 }).catch(function (error) {
 	console.error(error);
 });
+
+module.exports = router;

@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
 app.use(express.static('public'));
 app.use(express.json({ limit: "50mb" }));
 
 const cors = require ('cors');
 app.use(cors());
 
+const dotenv = require('dotenv');
+dotenv.config();
 require('dotenv/config');
 const dbConnect = require('./config/db_connect');
 dbConnect();
@@ -31,9 +32,9 @@ app.get('/api/welcome', cors(corsOptions), auth, (req, res) => {
 const authRoute = require('./routes/authentication');
 app.use('/api/auth', authRoute);
 
-// job_search
+// job search
 const searchRoute = require('./routes/job_search');
-app.use('/api/jobs/search', searchRoute);
+app.use('/api/jobs', searchRoute);
 
 // job_filter
 const filterRoute = require('./routes/job_filter');

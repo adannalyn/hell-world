@@ -1,13 +1,15 @@
 const axios = require("axios");
 const express = require("express");               const router = express.Router();
+const dotenv = require('dotenv');
+dotenv.config();       
 
 const options = {
   method: 'GET',
   url: 'https://jsearch.p.rapidapi.com/search-filters',
   params: {query: 'Python developer in Texas, USA'},
   headers: {
-    'X-RapidAPI-Key': '79961a3597mshd4c28761b6c729dp193d39jsn3e6e912e6b95',
-    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+    'X-RapidAPI-Key': process.env.RapidKey,
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
   }
 };
 

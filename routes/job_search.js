@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/', async (req, res) => {
+router.get('/search', async (req, res) => {
     try{
         const pages = parseInt(req.query.page) -1 || 0;
         const limit = parseInt(req.query.limit) || 5;

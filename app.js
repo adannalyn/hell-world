@@ -32,19 +32,19 @@ app.get('/api/welcome', cors(corsOptions), auth, (req, res) => {
 const authRoute = require('./routes/authentication');
 app.use('/api/auth', authRoute);
 
+// Reset Password
+const passwordReset = require("./routes/passwordReset");
+app.use("/api/password-reset", passwordReset);
+const users = require("./routes/users");
+app.use("/api/users", users);
+
 // job search
 const searchRoute = require('./routes/job_search');
 app.use('/api/jobs', searchRoute);
 
-// job_filter
+// job filter
 const filterRoute = require('./routes/job_filter');
-app.use('/api/jobs/filter', filterRoute);
-
-// Reset Password
-const passwordReset = require("./routes/passwordReset");
-const users = require("./routes/users");
-
-app.use("/api/users", users);
-app.use("/api/password-reset", passwordReset);
+app.use('/api/jobs', filterRoute);
 
 module.exports = app;
+

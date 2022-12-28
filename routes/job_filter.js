@@ -1,8 +1,6 @@
 const axios = require("axios");
 const express = require("express");
 const router = express.Router();
-const dotenv = require('dotenv');
-dotenv.config();       
 
 const options = {
   'Access-Control-Allow-Method': 'GET',
@@ -17,9 +15,9 @@ const options = {
 };
 
 axios.request(options).then(function (response) {
-	// console.log(response.data);
+	 //console.log(response.data);
 }).catch(function (error) {
-	// console.error(error);
+	 //console.error(error);
 });
 
 router.get('/', (req, res) =>{

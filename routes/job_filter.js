@@ -1,8 +1,6 @@
-const axios = require("axios");
+const axios = require('axios').default;
 const express = require("express");
-const router = express.Router();
-const dotenv = require('dotenv');
-dotenv.config();       
+const router = express.Router();       
 
 const options = {
   method: 'GET',

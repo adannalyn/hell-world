@@ -5,30 +5,22 @@ const passwordComplexity = require("joi-password-complexity");
 
 const PostSchema = new mongoose.Schema({
     email: { type: String, unique: true },
-    password: { type: String },
-    confirmPassword : { type: String },
+    password: { type: String, required: true },
+    confirmPassword : { type: String, required:true },
 });
 
 PostSchema.methods.generateAuthToken = function () {
-
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "5h",
-        }
-      );
-      user.token = token;
-      res.status(201).json(user);
+    const token = jwt.sign ({ _id: this._id}, process.env.JWTPRIVATEKEY, { expiresIn: "7d" });
+    return token
 };
-
 const User = mongoose.model("user", PostSchema);
 const validate = (data) => {
     const schema = Joi.object({
-        confirmPassword: Joi.string().required(),
         email: Joi.string().email().required().label("Email"),
-        password: passwordComplexity().validate("aPassword123!"),
+        password: passwordComplexity().required.label("aPassword123!"),
+        confirmPassword: passwordComplexity().required.label("aPassword123!"),
     });
-    return schema.validate(data);
-}
+    return schema.validate(data)
+};
+
 module.exports = { User, validate };

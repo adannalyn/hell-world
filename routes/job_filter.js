@@ -3,7 +3,9 @@ const express = require("express");
 const router = express.Router();       
 
 const options = {
-  method: 'GET',
+  'Access-Control-Allow-Method': 'GET',
+  'Access-Control-Allow-Origin': '*',
+  'Content-Type': 'application/json',
   url: 'https://jsearch.p.rapidapi.com/search-filters',
   params: {query: 'Python developer in Texas, USA'},
   headers: {
@@ -13,9 +15,9 @@ const options = {
 };
 
 axios.request(options).then(function (response) {
-	//console.log(response.data);
+	// console.log(response.data);
 }).catch(function (error) {
-	//console.error(error);
+	// console.error(error);
 });
 
 router.get('/', (req, res) =>{

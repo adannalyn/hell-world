@@ -16,5 +16,8 @@ app.use(auth(config));
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
+<<<<<<< HEAD
 
 module.exports = app;
+=======
+>>>>>>> 7941595b6cba6428be9d8ac7fa48c71071ba3539

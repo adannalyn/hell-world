@@ -1,29 +1,50 @@
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const { isEmail } = require("validator");
 
-const UserSchema = new Mongoose.Schema({
+const userSchema = mongoose.Schema({
   email: {
     type: String,
-    unique: true,
-    required: true,
+    required: [true, "Email is required"],
+    validate: {
+      validator: isEmail,
+      message: (props) => `${props.value} is not a valid email`,
+    },
   },
+
   password: {
     type: String,
-    minlength: 6,
-    required: true,
+    required: [true, "Password is required"],
+    validate: {
+      validator: function (value) {
+        return value.length >= 6;
+      },
+      message: () => "Password must be at least six characters long",
+    },
   },
+
   confirmPassword: {
     type: String,
-    minlength: 6,
-    required: true,
+    required: [true, "Confirm Password is required"],
+    validate: {
+      validator: function (value) {
+        return value.length >= 6;
+      },
+      message: () => "Confirm Password must be at least six characters long",
+    },
   },
+
   role: {
-    type: String,
-    default: "JobSeeker",
-    required: true,
-    enum: ["jobseeker", "employer", "admin"]
-  },
+    bsonType: "string",
+    enum: [ "admin", "jobSeeker", "employer", null ],
+    validate: {
+      validator: function (value) {
+        return value.role;
+      },
+      message: () => "can only be one of the role",
+    },
+    
+ },
+
 });
 
-const User = Mongoose.model("user", UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

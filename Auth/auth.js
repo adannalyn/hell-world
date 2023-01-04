@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const jwtSecret =
   "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd";
+
 exports.register = async (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
   if (password.length < 6) {
@@ -27,6 +28,8 @@ exports.register = async (req, res, next) => {
         res.cookie("jwt", token, {
           httpOnly: true,
           maxAge: maxAge * 1000,
+      
+      
         });
         res.status(201).json({
           message: "User successfully created",

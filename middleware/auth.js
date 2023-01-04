@@ -22,14 +22,34 @@ exports.adminAuth = (req, res, next) => {
       .json({ message: "Not authorized, token not available" });
   }
 };
-exports.userAuth = (req, res, next) => {
+exports.jobSeekerAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, jwtSecret, (err, decodedToken) => {
       if (err) {
         return res.status(401).json({ message: "Not authorized" });
       } else {
-        if (decodedToken.role !== "Basic") {
+        if (decodedToken.role !== "jobSeeker") {
+          return res.status(401).json({ message: "Not authorized" });
+        } else {
+          next();
+        }
+      }
+    });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" });
+  }
+};
+exports.employerAuth = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" });
+      } else {
+        if (decodedToken.role !== "employer") {
           return res.status(401).json({ message: "Not authorized" });
         } else {
           next();

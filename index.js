@@ -5,8 +5,8 @@ const server = http.createServer(app);
 require('events').EventEmitter.prototype._maxListeners = 100;
 
 require('dotenv/config');
-const dbConnect = require('./config/db_connect');
-dbConnect();
+const connectDB = require('./config/db_connect');
+connectDB();
 
 const { API_PORT } = process.env;
 const port = process.env.PORT || API_PORT;

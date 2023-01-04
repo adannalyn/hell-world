@@ -1,14 +1,14 @@
-const mongoose = require ('mongoose');
+const mongoose = require("mongoose");
 
-const dbConnect = async () => {
-    try {
-      mongoose.connect(process.env.DB_CONNECT, mongoose.set('strictQuery', true),() => {
-        console.log('connected to MongoDB! ');
-    });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  
+const localDB = `mongodb+srv://chinyere:vNAsRcM3df89L8Iv@jobinairee.pgajtf0.mongodb.net/newJob?retryWrites=true&w=majority`;
 
-module.exports = dbConnect;
+const connectDB = async () => {
+  await mongoose.connect(localDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  console.log("Connected to MongoDB Successfully!");
+};
+
+module.exports = connectDB;

@@ -34,10 +34,15 @@ const userSchema = mongoose.Schema({
   },
 
   role: {
+<<<<<<< HEAD
     type: "string",
     enum: [ "admin", "jobSeeker", "employer"]
     },
     
+=======
+    bsonType: "string",
+    enum: [ "admin", "jobSeeker", "employer" ]
+>>>>>>> 7edf4a6773966925cb69a3eea82dbd553cb70e40
  },
 
 );

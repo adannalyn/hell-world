@@ -1,37 +1,38 @@
-class JOBSFeatures {
-    constructor(query, queryStr){
-        this.query = query;
-        this.queryStr = queryStr;
-    }
-    search() {
-        const keyword = this.queryStr.keyword
-        ? {
-            name: {
-                $regex: this.queryStr.keyword,
-                $options: "i",
-            },
-        }
-        : {};
-        console.log(keyword);
-        this.query = this.query.find({ ...keyword });
-        return this;
-    }
-    filter() {
-        const queryCopy = { ...this.queryStr };
-        console.log(queryCopy);
-        const removeFields = ["keyword", "limit", "page"];
-        removeFields.forEach((el) => delete queryCopy[el]);
-        let queryStr = JSON.stringify(queryCopy);
-        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match)=> `$$ { match }`);
-        this.query = this.query.find(this.queryStr);
-        return this;
-    }
-    pagination(resPerPage) {
-        const currentPage = Number (this.queryStr.page) || 1;
-        const skip = resPerPage * (currentPage - 1);
-        this.query = this.query.limit(resPerPage).skip(skip);
-        return this;
-    }
-}
+const axios = require("axios");
 
-module.exports = JOBSFeatures;
+const options = {
+  method: 'GET',
+  url: 'https://indeed-indeed.p.rapidapi.com/apisearch',
+  params: {
+    publisher: 'undefined',
+    v: '2',
+    format: 'json',
+    callback: '<REQUIRED>',
+    q: 'java',
+    l: 'austin, tx',
+    sort: '<REQUIRED>',
+    radius: '25',
+    st: '<REQUIRED>',
+    jt: '<REQUIRED>',
+    start: '<REQUIRED>',
+    limit: '<REQUIRED>',
+    fromage: '<REQUIRED>',
+    highlight: '<REQUIRED>',
+    filter: '<REQUIRED>',
+    latlong: '<REQUIRED>',
+    co: '<REQUIRED>',
+    chnl: '<REQUIRED>',
+    userip: '<REQUIRED>',
+    useragent: '<REQUIRED>'
+  },
+  headers: {
+    'X-RapidAPI-Key': '79961a3597mshd4c28761b6c729dp193d39jsn3e6e912e6b95',
+    'X-RapidAPI-Host': 'indeed-indeed.p.rapidapi.com'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+}).catch(function (error) {
+	console.error(error);
+});

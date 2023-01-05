@@ -35,14 +35,7 @@ const userSchema = mongoose.Schema({
 
   role: {
     bsonType: "string",
-    enum: [ "admin", "jobSeeker", "employer", null ],
-    validate: {
-      validator: function (value) {
-        return value.role;
-      },
-      message: () => "can only be one of the role",
-    },
-    
+    enum: [ "admin", "jobSeeker", "employer" ]
  },
 
 });

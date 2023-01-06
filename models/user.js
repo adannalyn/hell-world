@@ -35,18 +35,10 @@ const userSchema = mongoose.Schema({
 
   role: {
     type: String,
-<<<<<<< HEAD
     default: "jobSeeker",
-    }
- },
-
-);
-=======
     enum: [ "admin", "jobSeeker", "employer"],
-    default: "jobSeeker",
     required: true,
     },
 });
->>>>>>> 81be5ef00bef9ae8991ad0dc3156e8384f003c2f
 
 module.exports = mongoose.model("User", userSchema);

@@ -31,12 +31,12 @@ app.get('/api/welcome', cors(corsOptions), (req, res) => {
 });
 
 // Routes
-<<<<<<< HEAD
+
 app.use("/api/", require("./Auth/route"));
-=======
+
 const routeAuth = require("./Auth/route");
 app.use("/api", routeAuth);
->>>>>>> 81be5ef00bef9ae8991ad0dc3156e8384f003c2f
+
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/register", (req, res) => res.render("register"));

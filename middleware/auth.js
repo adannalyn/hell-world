@@ -22,6 +22,7 @@ exports.adminAuth = (req, res, next) => {
       .json({ message: "Not authorized, token not available" });
   }
 };
+
 exports.jobSeekerAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -42,6 +43,7 @@ exports.jobSeekerAuth = (req, res, next) => {
       .json({ message: "Not authorized, token not available" });
   }
 };
+
 exports.employerAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {

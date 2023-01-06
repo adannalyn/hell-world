@@ -6,7 +6,7 @@ const jwtSecret =
   "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd";
 
 exports.register = async (req, res, next) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, role } = req.body;
   if (password.length < 6) {
     return res.status(400).json({ message: "Password less than 6 characters" });
   }
@@ -15,6 +15,7 @@ exports.register = async (req, res, next) => {
       email,
       password: hash,
       confirmPassword: hash,
+      role,
     })
       .then((user) => {
         const maxAge = 3 * 60 * 60;

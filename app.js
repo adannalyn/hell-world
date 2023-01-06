@@ -28,7 +28,8 @@ app.get('/api/welcome', cors(corsOptions), (req, res) => {
 });
 
 // Routes
-app.use("/api/auth", require("./Auth/route"));
+const routeAuth = require("./Auth/route");
+app.use("/api", routeAuth);
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/register", (req, res) => res.render("register"));
@@ -46,7 +47,7 @@ const passwordReset = require("./routes/passwordReset");
 app.use("/api/password-reset", passwordReset);
 
 const users = require("./routes/users");
-app.use("/api/users", users);
+app.use("/api", users);
 
 module.exports = app;
 

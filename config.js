@@ -1,10 +1,8 @@
 module.exports = {
-
-APP_ID: '6fa17f02',
-
-API_KEY: 'f0d9c1f7092489b9f32f611db7454d16',
-
-BASE_URL: 'https://api.adzuna.com/v1/api/jobs',
-
-BASE_PARAMS: 'search/1?&results_per_page=20&content-type=application/json',
+    'X-RapidAPI-Key': 'eadb9f1502msh1e3560b5e5f5c76p17603djsn1713211a9b62',
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+    
+    url: 'https://jsearch.p.rapidapi.com/search',
+    
+    params: 'search/1?&results_per_page=20&content-type=application/json'
 };

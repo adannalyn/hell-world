@@ -2,32 +2,47 @@ const axios = require("axios");
 
 const options = {
   method: 'GET',
-  url: 'https://indeed-indeed.p.rapidapi.com/apisearch',
+  url: 'https://jsearch.p.rapidapi.com/search',
   params: {
-    publisher: 'undefined',
-    v: '2',
-    format: 'json',
-    callback: '<REQUIRED>',
-    q: 'java',
-    l: 'austin, tx',
-    sort: '<REQUIRED>',
-    radius: '25',
-    st: '<REQUIRED>',
-    jt: '<REQUIRED>',
-    start: '<REQUIRED>',
-    limit: '<REQUIRED>',
-    fromage: '<REQUIRED>',
-    highlight: '<REQUIRED>',
-    filter: '<REQUIRED>',
-    latlong: '<REQUIRED>',
-    co: '<REQUIRED>',
-    chnl: '<REQUIRED>',
-    userip: '<REQUIRED>',
-    useragent: '<REQUIRED>'
+    query: 'Python developer in lagos, ng',
+    page: '4',
+    num_pages: '5',
+    date_posted: 'month',
+    remote_jobs_only: 'true',
+    employment_types: 'fulltime',
+    job_requirements: 'no_experience',
+    job_titles: 'product_design'
   },
   headers: {
-    'X-RapidAPI-Key': '79961a3597mshd4c28761b6c729dp193d39jsn3e6e912e6b95',
-    'X-RapidAPI-Host': 'indeed-indeed.p.rapidapi.com'
+    'X-RapidAPI-Key': 'eadb9f1502msh1e3560b5e5f5c76p17603djsn1713211a9b62',
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+}).catch(function (error) {
+	console.error(error);
+});
+
+const axios = require("axios");
+
+const options = {
+  method: 'GET',
+  url: 'https://jsearch.p.rapidapi.com/search',
+  params: {
+    query: 'Python developer in lagos, ng',
+    page: '4',
+    num_pages: '5',
+    date_posted: 'month',
+    remote_jobs_only: 'true',
+    employment_types: 'fulltime',
+    job_requirements: 'no_experience',
+    job_titles: 'product_design'
+  },
+  headers: {
+    'X-RapidAPI-Key': 'eadb9f1502msh1e3560b5e5f5c76p17603djsn1713211a9b62',
+    'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
   }
 };
 

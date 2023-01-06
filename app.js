@@ -32,8 +32,6 @@ app.get('/api/welcome', cors(corsOptions), (req, res) => {
 
 // Routes
 
-app.use("/api/", require("./Auth/route"));
-
 const routeAuth = require("./Auth/route");
 app.use("/api", routeAuth);
 

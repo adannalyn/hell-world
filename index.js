@@ -1,6 +1,6 @@
 const http = require("http");
 const app = require("./app");
-const serve = http.createServer(app);
+
 
 require('events').EventEmitter.prototype._maxListeners = 100;
 
@@ -8,7 +8,7 @@ require('dotenv/config');
 const connectDB = require('./config/db_connect');
 connectDB();
 
-const createServer = require('http').createServer;
+const serve = http.createServer(app);
 const axios = require('axios/dist/node/axios.cjs'); 
 const chalk = require('chalk');
 const url = require ('url');
@@ -20,7 +20,7 @@ const headers = {
   'Access-Control-Allow-Methods': 'GET',
 };
 
-const server = createServer((req, res) => {
+const server = http.createServer((req, res) => {
   const requestURL = url.parse(req.url);
   const decodedParams = decodeParams(new URLSearchParams(requestURL.search));
   const { search, location, country = 'ng' }  = decodedParams;
@@ -48,9 +48,9 @@ const decodeParams = searchParams => Array
 const { API_PORT } = process.env;
 const port = process.env.PORT || API_PORT;
 
-serve.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-module.exports = serve;
+module.exports = {server, serve};
 

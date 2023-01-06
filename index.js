@@ -9,15 +9,21 @@ const connectDB = require('./config/db_connect');
 connectDB();
 
 const createServer = require('http').createServer;
-const axios = require ('axios');
+const axios = require('axios/dist/node/axios.cjs'); 
 const chalk = require('chalk');
 const url = require ('url');
 const config = require ('./config');
 
+const headers = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET',
+};
+
 const server = createServer((req, res) => {
   const requestURL = url.parse(req.url);
   const decodedParams = decodeParams(new URLSearchParams(requestURL.search));
-  const { search, location, country = 'gb' }  = decodedParams;
+  const { search, location, country = 'ng' }  = decodedParams;
 
   const targetURL = `${config.BASE_URL}/${country.toLowerCase()}/${config.BASE_PARAMS}&app_id=${config.APP_ID}&app_key=${config.API_KEY}&what=${search}&where=${location}`;
     if (req.method === 'GET') {

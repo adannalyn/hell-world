@@ -1,4 +1,4 @@
-const { User } = require("../models/user");
+const User = require("../models/user");
 const Token = require("../models/token");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
@@ -6,7 +6,7 @@ const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
 
-router.post("/users", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const schema = Joi.object({ email: Joi.string().email().required() });
         const { error } = schema.validate(req.body);

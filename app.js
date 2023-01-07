@@ -15,9 +15,6 @@ app.use(cors());
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-
 const { adminAuth, jobSeekerAuth, employerAuth } = require("./middleware/auth.js");
 
 const corsOptions = {
@@ -31,10 +28,8 @@ app.get('/api/welcome', cors(corsOptions), (req, res) => {
 });
 
 // Routes
-
 const routeAuth = require("./Auth/route");
 app.use("/api", routeAuth);
-
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/register", (req, res) => res.render("register"));
@@ -44,15 +39,15 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 app.get("/admin", adminAuth, (req, res) => res.render("admin"));
-app.get("/jobSeeker", jobSeekerAuth, (req, res) => res.render("jobSeeker"));
-app.get("/employer", employerAuth, (req, res) => res.render("employer"));
+app.get("/basic", jobSeekerAuth, (req, res) => res.render("jobSeeker"));
+app.get("/basic", employerAuth, (req, res) => res.render("employer"));
 
 // Reset Password
 const passwordReset = require("./routes/passwordReset");
 app.use("/api/password-reset", passwordReset);
 
 const users = require("./routes/users");
-app.use("/api", users);
+app.use("/api/users", users);
 
 module.exports = app;
 

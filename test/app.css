@@ -1,0 +1,9 @@
+#job-board {
+    width: 50%;
+    margin: 0 auto;
+}
+.job-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}

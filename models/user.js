@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
+const Joi = require('joi');
 
 const userSchema = mongoose.Schema({
   email: {
@@ -41,4 +42,18 @@ const userSchema = mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("User", userSchema);
+//const User = mongoose.model("user", userSchema);
+
+const validate = (user) => {
+    const schema = Joi.object({
+        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).lowercase().required(),
+        password: Joi.string().min(3).max(15).required(),
+	confirmPassword: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } }),
+	role: Joi.string().default('admin').required()
+
+    });
+
+    return schema.validate(user);
+};
+
+module.exports = User = mongoose.model('user', userSchema)

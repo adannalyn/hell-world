@@ -1,23 +1,28 @@
-const express = require('express');
-const axios = require('axios');
-const app = express();
+const jobBoard = document.getElementById('job-board');
+const jobList = document.getElementById('job-list');
+const searchButton = document.getElementById('search-button');
+const jobSearch = document.getElementById('job-search');
 
-app.get('/jobs', (req, res) => {
-    const query = req.query.q;
-    const location = req.query.location;
-    const apiKey = 'YOUR_API_KEY';
-    const url = `https://jobs.github.com/positions.json?description=${query}&location=${location}`;
+const jobs = [
+  { title: "JavaScript Developer", location: "New York" },
+  { title: "Python Developer", location: "San Francisco" },
+  { title: "DevOps Engineer", location: "Remote" },
+  { title: "Product Manager", location: "Los Angeles" },
+  { title: "Data Scientist", location: "Chicago" }
+];
 
-    axios.get(url)
-        .then(response => {
-            res.json(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: 'Failed to retrieve job listings' });
-        });
-});
+searchButton.addEventListener('click', function() {
+  const searchTerm = jobSearch.value;
+  let searchResults = "";
 
-app.listen(3000, () => {
-    console.log('Server started on port 3000');
+  for (let i = 0; i < jobs.length; i++) {
+    if (jobs[i].title.includes(searchTerm) || jobs[i].location.includes(searchTerm)) {
+      searchResults += `<div class="job-item">
+        <h2>${jobs[i].title}</h2>
+        <p>Location: ${jobs[i].location}</p>
+      </div>`;
+    }
+  }
+
+  jobList.innerHTML = searchResults;
 });
